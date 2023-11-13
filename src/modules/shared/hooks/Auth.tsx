@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useState, useContext, PropsWithChildren } from 'react';
 import SpringApi from '../services/SpringApi';
-import LoginDTO from '../DTOs/LoginDTO';
+import LoginDTO from '../../auth/DTOs/LoginDTO';
 
 interface User {
     id: string;
@@ -21,7 +21,7 @@ interface LogInCredentials {
 interface AuthContextData {
     user: User;
     logIn(credentials: LogInCredentials): Promise<void>;
-    signOut(): void;
+    logOut(): void;
     updateUser(user: User): void;
 }
 
@@ -59,7 +59,7 @@ export const AuthProvider = ({children}: any) => {
         
     }, []);
 
-    const signOut = useCallback(() => {
+    const logOut = useCallback(() => {
         localStorage.removeItem('@turismo:token');
         localStorage.removeItem('@turismo:user');
 
@@ -76,7 +76,7 @@ export const AuthProvider = ({children}: any) => {
     }, [data.token]);
     
     return (
-        <AuthContext.Provider value={{user: data.user, logIn, signOut, updateUser}}>
+        <AuthContext.Provider value={{user: data.user, logIn, logOut, updateUser}}>
             {children}
         </AuthContext.Provider>
     );

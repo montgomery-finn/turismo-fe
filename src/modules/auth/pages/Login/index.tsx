@@ -2,28 +2,35 @@ import { useCallback, useState } from "react";
 import { Button, Label, TextInput } from 'flowbite-react';
 import CenterContainer from "../../../shared/components/CenterContainer";
 import { useAuth } from "../../../shared/hooks/Auth";
+import { useToast } from "../../../shared/hooks/toast";
 
 export default function Component() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
     
+    const { addToast } = useToast();
+
     const {logIn} = useAuth();
 
     const handleSubmit = useCallback(async () => {
-        setError('');
-        setSuccess('');
 
         try{
-           await logIn({email, password});
+           const a = await logIn({email, password});
+            
+            addToast({
+                color: 'green',
+                description: 'Já logou' 
+            });
         }
         catch(e: any){
-            setError(JSON.stringify(e.response.data));
+            addToast({
+                color: 'red',
+                description:JSON.stringify(e.response.data) 
+            });
         }
 
-    }, [email, password]);
+    }, [email, password, addToast]);
 
     return (
         <CenterContainer>
@@ -49,8 +56,6 @@ export default function Component() {
                 
                 <Button type="submit">Submit</Button>
 
-                <p className="text-red-500">{error}</p>
-                <p className="text-green-500">{success}</p>
             </form>
         </CenterContainer>
     );

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button, Datepicker, Label, TextInput } from 'flowbite-react';
 import SpringApi from "../../../shared/services/SpringApi";
-import PessoaDTO from "../../../shared/DTOs/PessoaDTO";
+import PessoaDTO from "../../../app/DTOs/PessoaDTO";
 import CenterContainer from "../../../shared/components/CenterContainer";
 
 export default function Register() {
