@@ -22,8 +22,12 @@ export default function MyApp() {
                 Passeios
               </Sidebar.Item>
 
-              <Sidebar.Item href="/users" icon={HiInbox} label="3">
+              <Sidebar.Item href="/users" icon={HiInbox}>
                 Users
+              </Sidebar.Item>
+
+              <Sidebar.Item href="/users" icon={HiInbox}>
+                Reservas
               </Sidebar.Item>
 
               <Sidebar.Item icon={HiLogout}>

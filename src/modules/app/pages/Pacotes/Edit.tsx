@@ -6,16 +6,15 @@ import { Button, Label, TextInput } from "flowbite-react";
 import Select from 'react-select'
 import SelectOption from "../../../shared/DTOs/SelectOption";
 import { useToast } from "../../../shared/hooks/toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Pacote from "../../DTOs/Pacote";
 
-export default function Create() {
+export default function EditPacote() {
+
+    const { id } = useParams();
 
     const [passeios, setPasseios] = useState<SelectOption[]>([]);
     const [selectedPasseios, setSelectedPasseios] = useState<SelectOption[]>([]);
-
-    useEffect(() => {
-        setSelectedPasseios([]);
-    }, [passeios]);
 
     const [description, setDescription] = useState('');
 
@@ -29,6 +28,21 @@ export default function Create() {
         })));
     }, []);
 
+    const buscaPacote = useCallback(async (pacoteId: string) => {
+        const response = await SpringApi.get<Pacote>(`pacote/${pacoteId}`);
+
+        setDescription(response.data.descricao);
+        setPrice(response.data.preco);
+        setSelectedPasseios(response.data.passeios.map(passeio => ({
+            label: passeio.destino,
+            value: passeio.id
+        })));
+    }, []);
+
+    useEffect(() => {
+        buscaPacote(id as string);
+    }, [id]);
+
     useEffect(() => {
         buscaPasseios();
     }, [buscaPasseios]);
@@ -40,7 +54,7 @@ export default function Create() {
     const handleSubmit = useCallback(async () => {
         
         try{
-            await SpringApi.post('pacote', {
+            await SpringApi.put(`pacote/${id}`, {
                 descricao: description,
                 preco: price,
                 passeiosIds: selectedPasseios.map(passeio => passeio.value)
@@ -48,7 +62,7 @@ export default function Create() {
 
             addToast({
                 color: 'green',
-                description: 'Já cadastrou'
+                description: 'Já atualizou'
             })
 
             navigate('/pacotes');
@@ -60,11 +74,11 @@ export default function Create() {
             });
         }
 
-    }, [description, price, selectedPasseios]);
+    }, [id, description, price, selectedPasseios]);
 
     return (
         <div>
-            <Title>Aqui adiciona um novo pacote</Title>
+            <Title>Aqui edita um pacote</Title>
 
             <form action="#" className="space-y-4">
                 <div>
@@ -98,7 +112,7 @@ export default function Create() {
                         />
                 </div>
 
-                <Button onClick={handleSubmit}>Adiciona</Button>
+                <Button onClick={handleSubmit}>Salva</Button>
             </form>
         </div>
     )

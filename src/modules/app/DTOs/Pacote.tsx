@@ -5,5 +5,6 @@ export default interface Pacote {
     createdAt: Date;
     updatedAt:Date;
     descricao: string;
+    preco: number;
     passeios: PasseioDTO[]; 
 }

@@ -64,42 +64,49 @@ export default function Pacotes () {
 
             <div className="flex gap-4">
                 {pacotes.map(pacote => (
-                    <Card className="max-w-lg" key={pacote.id}>
-                        <div className="flex justify-between gap-4">
-                            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                {pacote.descricao}
-                            </h5>
+                    <Card key={pacote.id}>   
+                        <div className="flex flex-col items-stretch h-full">
 
-                            <Button color="failure" onClick={() => handleDelete(pacote.id)}>
-                                <HiTrash />
-                            </Button>
+                            <div className="flex justify-between gap-4">
+                                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                    {pacote.descricao}
+                                </h5>
 
-                            <Link to={`/passeios/edit/${pacote.id}`}>
-                                <Button color="warning">
-                                    <HiPencil />
-                                </Button>
-                            </Link>
+                                <div className="flex gap-4">
+                                    <Button color="failure" onClick={() => handleDelete(pacote.id)}>
+                                        <HiTrash />
+                                    </Button>
+
+                                    <Link to={`/pacotes/edit/${pacote.id}`}>
+                                        <Button color="warning">
+                                            <HiPencil />
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </div>
+
+                            <p>Preço: {pacote.preco}</p>
+
+                            <Table>
+                                <Table.Head>
+                                    <Table.HeadCell>Passeio</Table.HeadCell>
+                                    <Table.HeadCell>Itinerário</Table.HeadCell>
+                                </Table.Head>
+                                <Table.Body className="divide-y">
+                                    {pacote.passeios.map(passeio => (
+                                        <Table.Row key={passeio.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                                {passeio.destino}
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                {passeio.itinerario}
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    ))}
+                                </Table.Body>
+                            </Table>
                         </div>
-
-                        <Table>
-                            <Table.Head>
-                                <Table.HeadCell>Passeio</Table.HeadCell>
-                                <Table.HeadCell>Itinerário</Table.HeadCell>
-                            </Table.Head>
-                            <Table.Body className="divide-y">
-                                {pacote.passeios.map(passeio => (
-                                    <Table.Row key={passeio.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                            {passeio.destino}
-                                        </Table.Cell>
-                                        <Table.Cell>
-                                            {passeio.itinerario}
-                                        </Table.Cell>
-                                    </Table.Row>
-                                ))}
-                            </Table.Body>
-                        </Table>
-                </Card>     
+                    </Card>     
                 ))}
             </div>
         </div>

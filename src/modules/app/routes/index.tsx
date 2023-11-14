@@ -6,15 +6,19 @@ import { Sidebar } from "flowbite-react";
 import { HiOutlineUserAdd, HiInbox, HiShoppingBag, HiLogin } from 'react-icons/hi';
 import Passeios from "../pages/Passeios";
 import EditPasseio from "../pages/Passeios/Edit";
+import Users from "../pages/Users";
+import EditPacote from "../pages/Pacotes/Edit";
 
 export default function AppRoutes() {
     return (        
         <Routes>
             <Route path="/pacotes" element={<Pacotes />} />
             <Route path="/pacotes/novo" element={<CreatePacote />} />
+            <Route path="/pacotes/edit/:id" element={<EditPacote />} />
             <Route path="/passeios" element={<Passeios />} />
             <Route path="/passeios/novo" element={<CreatePasseio />} />
             <Route path="/passeios/edit/:id" element={<EditPasseio />} />
+            <Route path="/users" element={<Users />} />
         </Routes>
     )
 }
