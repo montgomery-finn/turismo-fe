@@ -1,22 +1,40 @@
 import { useCallback, useEffect, useState } from "react";
-import { Button, Datepicker, Label, TextInput } from 'flowbite-react';
 import SpringApi from "../../../shared/services/SpringApi";
-import PessoaDTO from "../../../app/DTOs/PessoaDTO";
-import CenterContainer from "../../../shared/components/CenterContainer";
+import Title from "../../../shared/components/Title";
+import PasseioDTO from "../../DTOs/PasseioDTO";
+import { Button, Datepicker, Label, Select, TextInput, Textarea } from "flowbite-react";
+import { useToast } from "../../../shared/hooks/toast";
+import { useNavigate, useParams } from "react-router-dom";
+import PessoaDTO from "../../DTOs/PessoaDTO";
 
-export default function Register() {
+export default function EditUser() {
+
+    const { id } = useParams();
 
     const [name, setName] = useState('');
     const [birth, setBirth] = useState(new Date());
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
-    
-    const handleSubmit = useCallback(async () => {
-        setError('');
-        setSuccess('');
 
+    const busca = useCallback(async (userId: string) => {
+        const response = await SpringApi.get<PessoaDTO>(`pessoa/${userId}`);
+
+        setName(response.data.nome);
+        setBirth(response.data.nascimento);
+        setEmail(response.data.email);
+
+        console.log('ja buscou')
+    }, [id]);
+
+    useEffect(() => {
+        busca(id as string);
+    }, [id])
+
+    const { addToast } = useToast();
+
+    const navigate = useNavigate();
+
+    const handleSubmit = useCallback(async () => {
         try{
             const response = await SpringApi.post<PessoaDTO>('/pessoa', {
                 nome: name,
@@ -25,21 +43,28 @@ export default function Register() {
                 password
             });
 
-            setSuccess(`Já cadastrou ${response.data.nome}`);
-            // SpringApi.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        }
-        catch(e: any){
-            setError(JSON.stringify(e.response.data));
-            
-        }
+            addToast({
+                color: 'green',
+                description: 'Já cadastrou'
+            })
 
-    }, [name, email, birth, password]);
+            navigate('/users');
+            
+        } catch(e: any){
+            addToast({
+                color: 'red',
+                description:JSON.stringify(e.response.data) 
+            });
+        }
+        
+    }, [addToast, name, email, birth, password]);
 
     return (
-        <CenterContainer>
+        <div>
+            <Title>Aqui adiciona um novo usuário</Title>
 
-            <form className="flex max-w-md flex-col gap-4" action="#" onSubmit={handleSubmit}>
-                <div>
+            <form action="#" className="space-y-4">
+            <div>
                     <div className="mb-2 block">
                         <Label htmlFor="name" value="Nome" />
                     </div>
@@ -73,12 +98,9 @@ export default function Register() {
                     
                     <Datepicker id="birth" value={birth?.toString()} onSelectedDateChanged={(e) => setBirth(e)} />
                 </div>
-                
-                <Button type="submit">Submit</Button>
 
-                <p className="text-red-500">{error}</p>
-                <p className="text-green-500">{success}</p>
+                <Button onClick={handleSubmit}>Adiciona</Button>
             </form>
-        </CenterContainer>
-    );
+        </div>
+    )
 }

@@ -2,16 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import SpringApi from "../../../shared/services/SpringApi";
 import Title from "../../../shared/components/Title";
 import PasseioDTO from "../../DTOs/PasseioDTO";
-import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
+import { Button, Datepicker, Label, Select, TextInput, Textarea } from "flowbite-react";
 import { useToast } from "../../../shared/hooks/toast";
 import { useNavigate } from "react-router-dom";
+import PessoaDTO from "../../DTOs/PessoaDTO";
 
-export default function Create() {
+export default function CreateUser() {
 
-    const [description, setDescription] = useState('');
-    const [itinerario, setItinerario] = useState('');
-
-    const [price, setPrice] = useState<Number>(0);
+    const [name, setName] = useState('');
+    const [birth, setBirth] = useState(new Date());
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const { addToast } = useToast();
 
@@ -19,18 +20,19 @@ export default function Create() {
 
     const handleSubmit = useCallback(async () => {
         try{
-            await SpringApi.post('passeio', {
-                destino: description,
-                itinerario,
-                preco: price
+            const response = await SpringApi.post<PessoaDTO>('/pessoa', {
+                nome: name,
+                email: email,
+                nascimento: birth,
+                password
             });
-    
+
             addToast({
                 color: 'green',
                 description: 'Já cadastrou'
             })
 
-            navigate('/passeios');
+            navigate('/users');
             
         } catch(e: any){
             addToast({
@@ -39,40 +41,47 @@ export default function Create() {
             });
         }
         
-    }, [description, itinerario, price, addToast]);
+    }, [addToast, name, email, birth, password]);
 
     return (
         <div>
-            <Title>Aqui adiciona um novo passeio</Title>
+            <Title>Aqui adiciona um novo usuário</Title>
 
             <form action="#" className="space-y-4">
-                <div>
+            <div>
                     <div className="mb-2 block">
-                        <Label htmlFor="description" value="Descrição" />
+                        <Label htmlFor="name" value="Nome" />
                     </div>
 
-                    <TextInput id="description" required  
-                        value={description} onChange={(event) => setDescription(event.target.value) }/>
+                    <TextInput id="name" placeholder="Synntiah" required  
+                        value={name} onChange={(event) => setName(event.target.value) }/>
+                </div>
+                
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="email" value="Email" />
+                    </div>
+
+                    <TextInput id="email" type="email" placeholder="name@flowbite.com" required  
+                        value={email} onChange={(event) => setEmail(event.target.value) }/>
                 </div>
 
                 <div>
                     <div className="mb-2 block">
-                        <Label htmlFor="itinerario" value="Itinerario" />
-                    </div>
-
-                    <Textarea id="itinerario" required  
-                        value={itinerario} onChange={(event) => setItinerario(event.target.value) }/>
-                </div>
-
-                <div>
-                    <div className="mb-2 block">
-                        <Label htmlFor="price" value="Preço" />
+                        <Label htmlFor="password" value="Senha" />
                     </div>
                     
-                    <TextInput id="price" type="number" required 
-                        value={Number(price)} onChange={(event) => setPrice(Number(event.target.value)) }/>
+                    <TextInput id="password" type="password" required 
+                        value={password} onChange={(event) => setPassword(event.target.value) }/>
                 </div>
 
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="birth" value="Aniversário" />
+                    </div>
+                    
+                    <Datepicker id="birth" value={birth?.toString()} onSelectedDateChanged={(e) => setBirth(e)} />
+                </div>
 
                 <Button onClick={handleSubmit}>Adiciona</Button>
             </form>

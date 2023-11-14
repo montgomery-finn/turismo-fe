@@ -1,5 +1,5 @@
 import { Button, Sidebar } from "flowbite-react";
-import { HiOutlineUserAdd, HiInbox, HiShoppingBag, HiPaperAirplane, HiLogout } from 'react-icons/hi';
+import { HiUser, HiInbox, HiShoppingBag, HiPaperAirplane, HiLogout, HiPhotograph } from 'react-icons/hi';
 import MyRoutes from "../auth/routes";
 import AppRoutes from "./routes";
 import { useAuth } from "../shared/hooks/Auth";
@@ -22,11 +22,11 @@ export default function MyApp() {
                 Passeios
               </Sidebar.Item>
 
-              <Sidebar.Item href="/users" icon={HiInbox}>
+              <Sidebar.Item href="/users" icon={HiUser}>
                 Users
               </Sidebar.Item>
 
-              <Sidebar.Item href="/users" icon={HiInbox}>
+              <Sidebar.Item href="/users" icon={HiPhotograph}>
                 Reservas
               </Sidebar.Item>
 
