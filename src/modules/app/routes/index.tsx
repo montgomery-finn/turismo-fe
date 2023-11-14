@@ -10,6 +10,9 @@ import Users from "../pages/Users";
 import EditPacote from "../pages/Pacotes/Edit";
 import CreateUser from "../pages/Users/Create";
 import EditUser from "../pages/Users/Ediit";
+import Reservas from "../pages/Reservas";
+import CreateReserva from "../pages/Reservas/Create";
+import EditReserva from "../pages/Reservas/Edit";
 
 export default function AppRoutes() {
     return (        
@@ -25,6 +28,11 @@ export default function AppRoutes() {
             <Route path="/users" element={<Users />} />
             <Route path="/users/novo" element={<CreateUser />} />
             <Route path="/users/edit/:id" element={<EditUser />} />
+
+            <Route path="/reservas" element={<Reservas />} />
+            <Route path="/reservas/novo" element={<CreateReserva />} />
+            <Route path="/reservas/edit/:id" element={<EditReserva />} />
+
         </Routes>
     )
 }

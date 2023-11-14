@@ -7,6 +7,7 @@ interface ToastContextData {
 }
 
 export interface ToastMessage {
+    id: string;
     description: string;
     color: string;
 }
@@ -19,6 +20,7 @@ export const ToastProvider = ({children}: any) => {
 
     const addToast = useCallback(({description, color}: ToastMessage)=>{
         const toast = {
+            id: v4(),
             description,
             color,
         }
@@ -31,12 +33,16 @@ export const ToastProvider = ({children}: any) => {
         <ToastContext.Provider value={{addToast}} >
             {children}  
             <div className="fixed top-0 right-0 p-3">
-                {toasts.map((toast) => (
-                    <Toast className={`bg-${toast.color}-500 space-x-4 mb-4`}>
-                        <div className="ml-3 text-sm font-normal text-white">{toast.description}</div>
-                        <Toast.Toggle />
-                    </Toast>
-                ))}
+                {toasts.map((toast) => {
+                    const classAux = ` bg-${toast.color}-500 space-x-4 mb-4`;  
+                       
+                    return (
+                        <Toast key={toast.id} className={classAux}>
+                            <div className="ml-3 text-sm font-normal text-white">{toast.description}</div>
+                            <Toast.Toggle/>
+                        </Toast>
+                    )
+                })}
             </div>
         </ToastContext.Provider>
     )

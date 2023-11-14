@@ -26,7 +26,7 @@ export default function MyApp() {
                 Users
               </Sidebar.Item>
 
-              <Sidebar.Item href="/users" icon={HiPhotograph}>
+              <Sidebar.Item href="/reservas" icon={HiPhotograph}>
                 Reservas
               </Sidebar.Item>
 
