@@ -6,5 +6,6 @@ export default interface LoginDTO {
         id: string,
         nome: string,
         email: string
+        tipo: 'agencia' | 'cliente';
     }
 }

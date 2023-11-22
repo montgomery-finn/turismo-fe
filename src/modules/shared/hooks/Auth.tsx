@@ -1,11 +1,12 @@
 import React, { createContext, useCallback, useState, useContext, PropsWithChildren } from 'react';
 import SpringApi from '../services/SpringApi';
-import LoginDTO from '../../auth/DTOs/LoginDTO';
+import LoginDTO from '../../public/DTOs/LoginDTO';
 
 interface User {
     id: string;
     nome: string;
     email: string;
+    tipo: 'agencia' | 'cliente';
 }
 
 interface AuthState {

@@ -1,11 +1,15 @@
-import MyApp from "../../app";
-import AppRoutes from "../../app/routes";
-import AuthRoutes from "../../auth/routes";
+import Admin from "../../admin";
+import Client from "../../client";
+import Public from "../../public/pages";
 import { useAuth } from "../hooks/Auth";
 
 export default function SharedRoutes () {
 
     const { user } = useAuth();
 
-    return user ? <MyApp /> : <AuthRoutes />
+    if(!user) return <Public />;
+
+    if(user.tipo == 'cliente') return <Client />
+
+    return <Admin />; 
 }

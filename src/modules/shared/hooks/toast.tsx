@@ -9,7 +9,7 @@ interface ToastContextData {
 export interface ToastMessage {
     id: string;
     description: string;
-    color: string;
+    color: 'red' | 'green';
 }
 
 const ToastContext = createContext<ToastContextData>({} as ToastContextData);
@@ -34,10 +34,19 @@ export const ToastProvider = ({children}: any) => {
             {children}  
             <div className="fixed top-0 right-0 p-3">
                 {toasts.map((toast) => {
-                    const classAux = ` bg-${toast.color}-500 space-x-4 mb-4`;  
+                    const classAux = ` `;  
                        
+                    if (toast.color == 'green'){
+                        return (
+                            <Toast key={toast.id} className="bg-green-500 space-x-4 mb-4">
+                                <div className="ml-3 text-sm font-normal text-white">{toast.description}</div>
+                                <Toast.Toggle/>
+                            </Toast>
+                        )
+                    }
+
                     return (
-                        <Toast key={toast.id} className={classAux}>
+                        <Toast key={toast.id} className="bg-red-500 space-x-4 mb-4">
                             <div className="ml-3 text-sm font-normal text-white">{toast.description}</div>
                             <Toast.Toggle/>
                         </Toast>

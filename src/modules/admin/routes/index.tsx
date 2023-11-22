@@ -9,7 +9,7 @@ import EditPasseio from "../pages/Passeios/Edit";
 import Users from "../pages/Users";
 import EditPacote from "../pages/Pacotes/Edit";
 import CreateUser from "../pages/Users/Create";
-import EditUser from "../pages/Users/Ediit";
+import EditUser from "../pages/Users/Edit";
 import Reservas from "../pages/Reservas";
 import CreateReserva from "../pages/Reservas/Create";
 import EditReserva from "../pages/Reservas/Edit";
