@@ -9,21 +9,24 @@ import Title from "../../../shared/components/Title";
 import ReservaDTO from "../../../shared/DTOs/ReservaDTO";
 import { HiTrash, HiPencil } from 'react-icons/hi';
 import { useToast } from "../../../shared/hooks/toast";
+import { useAuth } from "../../../shared/hooks/Auth";
 
 
 export default function Reservas () {
 
     const [reservas, setReservas] = useState<ReservaDTO[]>([]);
 
-    const busca = useCallback(async () => {
-        const respose = await SpringApi.get<ReservaDTO[]>('reserva');
+    const { user } = useAuth();
+
+    const busca = useCallback(async (userId: string) => {
+        const respose = await SpringApi.get<ReservaDTO[]>(`reserva/getByUserId/${userId}`);
             
         setReservas(respose.data)
     }, []);
 
     useEffect(() => {
-        busca();        
-    }, [busca]);
+        busca(user.id as string);        
+    }, [busca, user]);
 
     const { addToast} = useToast();
 
@@ -40,7 +43,7 @@ export default function Reservas () {
                     description: 'Já excluiu'
                 })
 
-                await busca();
+                await busca(user.id);
             } catch(e: any){
                 addToast({
                     color: 'red',
@@ -49,7 +52,7 @@ export default function Reservas () {
             }
         }
         
-    }, []);
+    }, [user]);
 
     return (
         <div>

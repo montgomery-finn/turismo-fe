@@ -13,10 +13,13 @@ export default function Admin() {
     return (
         <div >
 
-          <Navbar homeHref="/"
+          <Navbar 
+            homeName="O sistema de reservas - Área da agência"
+            homeHref="/"
             links={[
               {href: '/admin/pacotes', name: 'Pacotes'},
               {href: '/admin/passeios', name: 'Passeios'},
+              {href: '/admin/reservas', name: 'Reservas'},
               {href: '/admin/users', name: 'Usuários'},
               {onClick: logOut, name: 'Logout'}
             ]}

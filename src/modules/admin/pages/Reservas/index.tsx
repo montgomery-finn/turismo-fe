@@ -10,6 +10,7 @@ import ReservaDTO from "../../../shared/DTOs/ReservaDTO";
 import { HiTrash, HiPencil } from 'react-icons/hi';
 import { useToast } from "../../../shared/hooks/toast";
 import FlexWrapContainer from "../../../shared/components/FlexWrapContainer";
+import { format } from 'date-fns';
 
 
 export default function Reservas () {
@@ -57,7 +58,7 @@ export default function Reservas () {
             <Title>Essas são as Reservas</Title>
 
             <Button className="mb-4">
-                <Link to="/reservas/novo">
+                <Link to="/admin/reservas/novo">
                     Aqui adiciona uma nova
                 </Link>
             </Button>
@@ -67,14 +68,14 @@ export default function Reservas () {
                     <Card className="max-w-lg" key={reserva.id}>
                         <div className="flex justify-between gap-4">
                             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                {reserva.data.toString()}
+                                {format(new Date(reserva.data), "dd/MM/yyyy")}
                             </h5>
 
                             <Button color="failure" onClick={() => handleDelete(reserva.id)}>
                                 <HiTrash />
                             </Button>
 
-                            <Link to={`/reservas/edit/${reserva.id}`}>
+                            <Link to={`/admin/reservas/edit/${reserva.id}`}>
                                 <Button color="warning">
                                     <HiPencil />
                                 </Button>

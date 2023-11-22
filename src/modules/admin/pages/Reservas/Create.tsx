@@ -64,7 +64,7 @@ export default function CreateReserva() {
                 description: 'Já cadastrou'
             })
 
-            navigate('/reservas');
+            navigate('/admin/reservas');
         }
         catch(e: any){
             addToast({

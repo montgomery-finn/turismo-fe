@@ -12,7 +12,9 @@ export default function Client() {
 
     return (
         <div >
-          <Navbar homeHref="/"
+          <Navbar 
+            homeName="O sistema de reservas - Área da cliente"
+            homeHref="/"
             links={[
               {href: '/client/pacotes', name: 'Pacotes'},
               {href: '/client/reservas', name: 'Reservas'},

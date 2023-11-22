@@ -30,7 +30,7 @@ export default function Create() {
                 description: 'Já cadastrou'
             })
 
-            navigate('/passeios');
+            navigate('/admin/passeios');
             
         } catch(e: any){
             addToast({

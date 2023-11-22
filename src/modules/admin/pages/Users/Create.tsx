@@ -32,7 +32,7 @@ export default function CreateUser() {
                 description: 'Já cadastrou'
             })
 
-            navigate('/users');
+            navigate('/admin/users');
             
         } catch(e: any){
             addToast({

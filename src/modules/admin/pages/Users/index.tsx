@@ -57,7 +57,7 @@ export default function Users () {
             <Title>Esses são os Pessoas</Title>
 
             <Button className="mb-4">
-                <Link to="/users/novo">
+                <Link to="/admin/users/novo">
                     Aqui adiciona um novo
                 </Link>
             </Button>
@@ -74,7 +74,7 @@ export default function Users () {
                                 <HiTrash />
                             </Button>
 
-                            <Link to={`/users/edit/${pessoa.id}`}>
+                            <Link to={`/admin/users/edit/${pessoa.id}`}>
                                 <Button color="warning">
                                     <HiPencil />
                                 </Button>

@@ -58,7 +58,7 @@ export default function Pacotes () {
             <Title>Esses são os pacotes</Title>
 
             <Button className="mb-4">
-                <Link to="/pacotes/novo">
+                <Link to="/admin/pacotes/novo">
                     Aqui adiciona um novo
                 </Link>
             </Button>
@@ -78,7 +78,7 @@ export default function Pacotes () {
                                         <HiTrash />
                                     </Button>
 
-                                    <Link to={`/pacotes/edit/${pacote.id}`}>
+                                    <Link to={`/admin/pacotes/edit/${pacote.id}`}>
                                         <Button color="warning">
                                             <HiPencil />
                                         </Button>

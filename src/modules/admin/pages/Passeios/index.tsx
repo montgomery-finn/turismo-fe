@@ -57,7 +57,7 @@ export default function Passeios () {
             <Title>Esses são os Passeios</Title>
 
             <Button className="mb-4">
-                <Link to="/passeios/novo">
+                <Link to="/admin/passeios/novo">
                     Aqui adiciona um novo
                 </Link>
             </Button>
@@ -74,7 +74,7 @@ export default function Passeios () {
                                 <HiTrash />
                             </Button>
 
-                            <Link to={`/passeios/edit/${passeio.id}`}>
+                            <Link to={`/admin/passeios/edit/${passeio.id}`}>
                                 <Button color="warning">
                                     <HiPencil />
                                 </Button>

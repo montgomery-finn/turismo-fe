@@ -11,7 +11,7 @@ export default function Component() {
     
     const { addToast } = useToast();
 
-    const {logIn} = useAuth();
+    const { logIn } = useAuth();
 
     const handleSubmit = useCallback(async () => {
 

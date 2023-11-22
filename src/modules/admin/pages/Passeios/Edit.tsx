@@ -40,7 +40,7 @@ export default function EditPasseio() {
                 preco: price
             })
     
-            navigate('/passeios');
+            navigate('/admin/passeios');
 
             addToast({
                 color: 'green',

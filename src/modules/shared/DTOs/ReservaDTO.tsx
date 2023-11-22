@@ -4,7 +4,7 @@ import PessoaDTO from '../../admin/DTOs/PessoaDTO';
 
 export default interface ReservaDTO {
     id: string;
-    data: Date;
+    data: string;
     pacote: Pacote;
     person: PessoaDTO;
 }

@@ -51,7 +51,7 @@ export default function Create() {
                 description: 'Já cadastrou'
             })
 
-            navigate('/pacotes');
+            navigate('/admin/pacotes');
         }
         catch(e: any){
             addToast({

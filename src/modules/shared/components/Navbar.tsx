@@ -1,6 +1,7 @@
 import { Navbar as FlowbiteNavbar } from "flowbite-react"
 
 interface NavbarProps {
+    homeName?: string;
     homeHref: string;
     links: {
         name: string;
@@ -9,11 +10,13 @@ interface NavbarProps {
     }[]
 }
 
-export default function Navbar({homeHref, links} : NavbarProps) {
+export default function Navbar({homeHref, homeName, links} : NavbarProps) {
     return (
         <FlowbiteNavbar fluid rounded>
         <FlowbiteNavbar.Brand href={homeHref}>
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">O sistema de reservas</span>
+            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                {homeName ?? 'O sistema de reservas'}
+            </span>
         </FlowbiteNavbar.Brand>
     
         <FlowbiteNavbar.Toggle />

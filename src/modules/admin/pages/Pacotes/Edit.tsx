@@ -65,7 +65,7 @@ export default function EditPacote() {
                 description: 'Já atualizou'
             })
 
-            navigate('/pacotes');
+            navigate('/admin/pacotes');
         }
         catch(e: any){
             addToast({

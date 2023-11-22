@@ -42,7 +42,8 @@ export default function EditReserva() {
     const buscaReserva = useCallback(async (reservaId: string) => {
         const response = await SpringApi.get<ReservaDTO>(`reserva/${reservaId}`)
 
-        setDate(response.data.data);
+        setDate(new Date(response.data.data));
+        
         setSelectedPacote({
             label: response.data.pacote.descricao,
             value: response.data.pacote.id
@@ -86,7 +87,7 @@ export default function EditReserva() {
                 description: 'Já atualizou'
             })
 
-            navigate('/reservas');
+            navigate('/admin/reservas');
         }
         catch(e: any){
             addToast({

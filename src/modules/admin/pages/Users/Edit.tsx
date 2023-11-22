@@ -48,7 +48,7 @@ export default function EditUser() {
                 description: 'Já cadastrou'
             })
 
-            navigate('/users');
+            navigate('/admin/users');
             
         } catch(e: any){
             addToast({
