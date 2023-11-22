@@ -6,20 +6,19 @@ import { useCallback, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import SpringApi from "../../../shared/services/SpringApi";
 import Title from "../../../shared/components/Title";
+import ReservaDTO from "../../../shared/DTOs/ReservaDTO";
 import { HiTrash, HiPencil } from 'react-icons/hi';
 import { useToast } from "../../../shared/hooks/toast";
-import PessoaDTO from "../../DTOs/PessoaDTO";
-import FlexWrapContainer from "../../../shared/components/FlexWrapContainer";
 
 
-export default function Users () {
+export default function Reservas () {
 
-    const [pessoas, setPessoas] = useState<PessoaDTO[]>([]);
+    const [reservas, setReservas] = useState<ReservaDTO[]>([]);
 
     const busca = useCallback(async () => {
-        const respose = await SpringApi.get<PessoaDTO[]>('pessoa');
+        const respose = await SpringApi.get<ReservaDTO[]>('reserva');
             
-        setPessoas(respose.data)
+        setReservas(respose.data)
     }, []);
 
     useEffect(() => {
@@ -34,7 +33,7 @@ export default function Users () {
         if(confirmed)
         {
             try {
-                await SpringApi.delete(`pessoa/${id}`);
+                await SpringApi.delete(`reserva/${id}`);
                 
                 addToast({
                     color: 'green',
@@ -54,40 +53,38 @@ export default function Users () {
 
     return (
         <div>
-            <Title>Esses são os Pessoas</Title>
+            <Title>Essas são as Reservas</Title>
 
             <Button className="mb-4">
-                <Link to="/users/novo">
-                    Aqui adiciona um novo
+                <Link to="/reservas/novo">
+                    Aqui adiciona uma nova
                 </Link>
             </Button>
 
-            <FlexWrapContainer>
-                {pessoas.map(pessoa => (
-                    <Card className="max-w-lg" key={pessoa.id}>
+            <div className="flex gap-4">
+                {reservas.map(reserva => (
+                    <Card className="max-w-lg" key={reserva.id}>
                         <div className="flex justify-between gap-4">
                             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                {pessoa.nome}
+                                {reserva.data.toString()}
                             </h5>
 
-                            <Button color="failure" onClick={() => handleDelete(pessoa.id)}>
+                            <Button color="failure" onClick={() => handleDelete(reserva.id)}>
                                 <HiTrash />
                             </Button>
 
-                            <Link to={`/users/edit/${pessoa.id}`}>
+                            <Link to={`/reservas/edit/${reserva.id}`}>
                                 <Button color="warning">
                                     <HiPencil />
                                 </Button>
                             </Link>
                         </div>
                     
-                        <ul>
-                            <li>{pessoa.email}</li>
-                            <li>{pessoa.nascimento.toString()}</li>
-                        </ul>
+                        <p>{reserva.pacote.descricao}</p>
+                        <p>{reserva.person.nome}</p>
                     </Card>     
                 ))}
-            </FlexWrapContainer>
+            </div>
         </div>
     )
 

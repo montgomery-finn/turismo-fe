@@ -34,7 +34,6 @@ export const ToastProvider = ({children}: any) => {
             {children}  
             <div className="fixed top-0 right-0 p-3">
                 {toasts.map((toast) => {
-                    const classAux = ` `;  
                        
                     if (toast.color == 'green'){
                         return (

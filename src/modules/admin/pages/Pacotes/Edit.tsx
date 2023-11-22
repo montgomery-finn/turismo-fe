@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import SpringApi from "../../../shared/services/SpringApi";
 import Title from "../../../shared/components/Title";
-import PasseioDTO from "../../DTOs/PasseioDTO";
+import PasseioDTO from "../../../shared/DTOs/PasseioDTO";
 import { Button, Label, TextInput } from "flowbite-react";
 import Select from 'react-select'
 import SelectOption from "../../../shared/DTOs/SelectOption";
 import { useToast } from "../../../shared/hooks/toast";
 import { useNavigate, useParams } from "react-router-dom";
-import Pacote from "../../DTOs/Pacote";
+import Pacote from "../../../shared/DTOs/Pacote";
 
 export default function EditPacote() {
 

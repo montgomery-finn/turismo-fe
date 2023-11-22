@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import Pacote from "../../../admin/DTOs/Pacote";
+import Pacote from "../../../shared/DTOs/Pacote";
 import SpringApi from "../../../shared/services/SpringApi";
 import Title from "../../../shared/components/Title";
 import { Button, Card, Table } from "flowbite-react";

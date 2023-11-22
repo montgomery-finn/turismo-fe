@@ -1,6 +1,6 @@
 
 import Pacote from './Pacote'
-import PessoaDTO from './PessoaDTO';
+import PessoaDTO from '../../admin/DTOs/PessoaDTO';
 
 export default interface ReservaDTO {
     id: string;

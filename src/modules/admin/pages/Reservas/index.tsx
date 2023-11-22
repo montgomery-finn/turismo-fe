@@ -6,9 +6,10 @@ import { useCallback, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import SpringApi from "../../../shared/services/SpringApi";
 import Title from "../../../shared/components/Title";
-import ReservaDTO from "../../DTOs/ReservaDTO";
+import ReservaDTO from "../../../shared/DTOs/ReservaDTO";
 import { HiTrash, HiPencil } from 'react-icons/hi';
 import { useToast } from "../../../shared/hooks/toast";
+import FlexWrapContainer from "../../../shared/components/FlexWrapContainer";
 
 
 export default function Reservas () {
@@ -61,7 +62,7 @@ export default function Reservas () {
                 </Link>
             </Button>
 
-            <div className="flex gap-4">
+            <FlexWrapContainer>
                 {reservas.map(reserva => (
                     <Card className="max-w-lg" key={reserva.id}>
                         <div className="flex justify-between gap-4">
@@ -84,7 +85,7 @@ export default function Reservas () {
                         <p>{reserva.person.nome}</p>
                     </Card>     
                 ))}
-            </div>
+            </FlexWrapContainer>
         </div>
     )
 

@@ -6,7 +6,7 @@ import { useAuth } from "../shared/hooks/Auth";
 import Navbar from "../shared/components/Navbar";
 
 
-export default function AdminRoutes() {
+export default function Admin() {
 
     const { logOut } = useAuth();
 
@@ -15,9 +15,9 @@ export default function AdminRoutes() {
 
           <Navbar homeHref="/"
             links={[
-              {href: '/pacotes', name: 'Pacotes'},
-              {href: '/passeios', name: 'Passeios'},
-              {href: '/users', name: 'Usuários'},
+              {href: '/admin/pacotes', name: 'Pacotes'},
+              {href: '/admin/passeios', name: 'Passeios'},
+              {href: '/admin/users', name: 'Usuários'},
               {onClick: logOut, name: 'Logout'}
             ]}
           />

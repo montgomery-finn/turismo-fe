@@ -15,24 +15,31 @@ import CreateReserva from "../pages/Reservas/Create";
 import EditReserva from "../pages/Reservas/Edit";
 
 export default function AppRoutes() {
-    return (        
+    return (  
         <Routes>
-            <Route path="/pacotes" element={<Pacotes />} />
-            <Route path="/pacotes/novo" element={<CreatePacote />} />
-            <Route path="/pacotes/edit/:id" element={<EditPacote />} />
+            <Route path="/admin/*" element={<SubRoutes />} />
+        </Routes>
+    )
+}
 
-            <Route path="/passeios" element={<Passeios />} />
-            <Route path="/passeios/novo" element={<CreatePasseio />} />
-            <Route path="/passeios/edit/:id" element={<EditPasseio />} />
+function SubRoutes() {
+    return (
+        <Routes>
+            <Route path="pacotes" element={<Pacotes />} />
+            <Route path="pacotes/novo" element={<CreatePacote />} />
+            <Route path="pacotes/edit/:id" element={<EditPacote />} />
+
+            <Route path="passeios" element={<Passeios />} />
+            <Route path="passeios/novo" element={<CreatePasseio />} />
+            <Route path="passeios/edit/:id" element={<EditPasseio />} />
             
-            <Route path="/users" element={<Users />} />
-            <Route path="/users/novo" element={<CreateUser />} />
-            <Route path="/users/edit/:id" element={<EditUser />} />
+            <Route path="users" element={<Users />} />
+            <Route path="users/novo" element={<CreateUser />} />
+            <Route path="users/edit/:id" element={<EditUser />} />
 
-            <Route path="/reservas" element={<Reservas />} />
-            <Route path="/reservas/novo" element={<CreateReserva />} />
-            <Route path="/reservas/edit/:id" element={<EditReserva />} />
-
+            <Route path="reservas" element={<Reservas />} />
+            <Route path="reservas/novo" element={<CreateReserva />} />
+            <Route path="reservas/edit/:id" element={<EditReserva />} />
         </Routes>
     )
 }

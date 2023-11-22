@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import SpringApi from "../../../shared/services/SpringApi";
 import Title from "../../../shared/components/Title";
-import PasseioDTO from "../../DTOs/PasseioDTO";
+import PasseioDTO from "../../../shared/DTOs/PasseioDTO";
 import { Button, Datepicker, Label, Select, TextInput, Textarea } from "flowbite-react";
 import { useToast } from "../../../shared/hooks/toast";
 import { useNavigate, useParams } from "react-router-dom";

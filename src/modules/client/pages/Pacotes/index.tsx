@@ -9,7 +9,6 @@ import SpringApi from "../../../shared/services/SpringApi";
 import Title from "../../../shared/components/Title";
 import { HiTrash, HiPencil } from 'react-icons/hi';
 import { useToast } from "../../../shared/hooks/toast";
-import FlexWrapContainer from "../../../shared/components/FlexWrapContainer";
 
 
 export default function Pacotes () {
@@ -63,7 +62,7 @@ export default function Pacotes () {
                 </Link>
             </Button>
 
-            <FlexWrapContainer>
+            <div className="flex flex-wrap bg-red-500 gap-4">
                 {pacotes.map(pacote => (
                     <Card key={pacote.id}>   
                         <div className="flex flex-col items-stretch h-full">
@@ -109,7 +108,7 @@ export default function Pacotes () {
                         </div>
                     </Card>     
                 ))}
-            </FlexWrapContainer>
+            </div>
         </div>
     )
 

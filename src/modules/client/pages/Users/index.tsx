@@ -9,7 +9,6 @@ import Title from "../../../shared/components/Title";
 import { HiTrash, HiPencil } from 'react-icons/hi';
 import { useToast } from "../../../shared/hooks/toast";
 import PessoaDTO from "../../DTOs/PessoaDTO";
-import FlexWrapContainer from "../../../shared/components/FlexWrapContainer";
 
 
 export default function Users () {
@@ -62,7 +61,7 @@ export default function Users () {
                 </Link>
             </Button>
 
-            <FlexWrapContainer>
+            <div className="flex gap-4">
                 {pessoas.map(pessoa => (
                     <Card className="max-w-lg" key={pessoa.id}>
                         <div className="flex justify-between gap-4">
@@ -87,7 +86,7 @@ export default function Users () {
                         </ul>
                     </Card>     
                 ))}
-            </FlexWrapContainer>
+            </div>
         </div>
     )
 
