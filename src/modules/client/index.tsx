@@ -12,12 +12,10 @@ export default function Client() {
 
     return (
         <div >
-
           <Navbar homeHref="/"
             links={[
               {href: '/client/pacotes', name: 'Pacotes'},
-              {href: '/client/passeios', name: 'Passeios'},
-              {href: '/client/users', name: 'Usuários'},
+              {href: '/client/reservas', name: 'Reservas'},
               {onClick: logOut, name: 'Logout'}
             ]}
           />

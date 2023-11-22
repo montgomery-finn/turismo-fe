@@ -55,12 +55,6 @@ export default function Reservas () {
         <div>
             <Title>Essas são as Reservas</Title>
 
-            <Button className="mb-4">
-                <Link to="/reservas/novo">
-                    Aqui adiciona uma nova
-                </Link>
-            </Button>
-
             <div className="flex gap-4">
                 {reservas.map(reserva => (
                     <Card className="max-w-lg" key={reserva.id}>

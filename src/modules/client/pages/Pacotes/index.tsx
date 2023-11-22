@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import Pacote from "../../../shared/DTOs/Pacote";
 import SpringApi from "../../../shared/services/SpringApi";
 import Title from "../../../shared/components/Title";
-import { HiTrash, HiPencil } from 'react-icons/hi';
+import { HiTrash, HiPencil, HiBookmark } from 'react-icons/hi';
 import { useToast } from "../../../shared/hooks/toast";
+import FlexWrapContainer from "../../../shared/components/FlexWrapContainer";
 
 
 export default function Pacotes () {
@@ -56,13 +57,7 @@ export default function Pacotes () {
         <div>
             <Title>Esses são os pacotes</Title>
 
-            <Button className="mb-4">
-                <Link to="/pacotes/novo">
-                    Aqui adiciona um novo
-                </Link>
-            </Button>
-
-            <div className="flex flex-wrap bg-red-500 gap-4">
+            <FlexWrapContainer>
                 {pacotes.map(pacote => (
                     <Card key={pacote.id}>   
                         <div className="flex flex-col items-stretch h-full">
@@ -73,13 +68,9 @@ export default function Pacotes () {
                                 </h5>
 
                                 <div className="flex gap-4">
-                                    <Button color="failure" onClick={() => handleDelete(pacote.id)}>
-                                        <HiTrash />
-                                    </Button>
-
-                                    <Link to={`/pacotes/edit/${pacote.id}`}>
-                                        <Button color="warning">
-                                            <HiPencil />
+                                    <Link to={`/client/reservas/novo/${pacote.id}`}>
+                                        <Button color="success">
+                                            <HiBookmark />
                                         </Button>
                                     </Link>
                                 </div>
@@ -108,7 +99,7 @@ export default function Pacotes () {
                         </div>
                     </Card>     
                 ))}
-            </div>
+            </FlexWrapContainer>
         </div>
     )
 
