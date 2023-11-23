@@ -1,6 +1,3 @@
-import { Button, Sidebar } from "flowbite-react";
-import { HiUser, HiInbox, HiShoppingBag, HiPaperAirplane, HiLogout, HiPhotograph } from 'react-icons/hi';
-import MyRoutes from "../public/routes";
 import AppRoutes from "./routes";
 import { useAuth } from "../shared/hooks/Auth";
 import Navbar from "../shared/components/Navbar";

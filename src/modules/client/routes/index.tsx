@@ -3,6 +3,8 @@ import Pacotes from "../pages/Pacotes";
 import Users from "../pages/Users";
 import Reservas from "../pages/Reservas";
 import CreateReserva from "../pages/Reservas/Create";
+import EditReserva from "../pages/Reservas/Edit";
+import ShowReserva from "../pages/Reservas/Show";
 
 export default function AppRoutes() {
     return (        
@@ -19,6 +21,8 @@ function SubRoutes() {
             <Route path="/users" element={<Users />} />
             <Route path="/reservas" element={<Reservas />} />
             <Route path="/reservas/novo/:pacoteId" element={<CreateReserva />} />
+            <Route path="/reservas/edit/:reservaId" element={<EditReserva />} />
+            <Route path="/reservas/show/:reservaId" element={<ShowReserva />} />
         </Routes>
     )
 }

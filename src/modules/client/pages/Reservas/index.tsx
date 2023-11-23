@@ -10,6 +10,8 @@ import ReservaDTO from "../../../shared/DTOs/ReservaDTO";
 import { HiTrash, HiPencil } from 'react-icons/hi';
 import { useToast } from "../../../shared/hooks/toast";
 import { useAuth } from "../../../shared/hooks/Auth";
+import FlexWrapContainer from "../../../shared/components/FlexWrapContainer";
+import { format } from "date-fns";
 
 
 export default function Reservas () {
@@ -19,7 +21,7 @@ export default function Reservas () {
     const { user } = useAuth();
 
     const busca = useCallback(async (userId: string) => {
-        const respose = await SpringApi.get<ReservaDTO[]>(`reserva/getByUserId/${userId}`);
+        const respose = await SpringApi.get<ReservaDTO[]>(`reserva/getByUser/${userId}`);
             
         setReservas(respose.data)
     }, []);
@@ -58,19 +60,19 @@ export default function Reservas () {
         <div>
             <Title>Essas são as Reservas</Title>
 
-            <div className="flex gap-4">
+            <FlexWrapContainer>
                 {reservas.map(reserva => (
                     <Card className="max-w-lg" key={reserva.id}>
                         <div className="flex justify-between gap-4">
                             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                {reserva.data.toString()}
+                                {format(new Date(reserva.data), "dd/MM/yyyy")}
                             </h5>
 
                             <Button color="failure" onClick={() => handleDelete(reserva.id)}>
                                 <HiTrash />
                             </Button>
 
-                            <Link to={`/reservas/edit/${reserva.id}`}>
+                            <Link to={`/client/reservas/edit/${reserva.id}`}>
                                 <Button color="warning">
                                     <HiPencil />
                                 </Button>
@@ -79,9 +81,11 @@ export default function Reservas () {
                     
                         <p>{reserva.pacote.descricao}</p>
                         <p>{reserva.person.nome}</p>
+
+                        <Button href={`/client/reservas/show/${reserva.id}`}>Ver detalhes</Button>
                     </Card>     
                 ))}
-            </div>
+            </FlexWrapContainer>
         </div>
     )
 
