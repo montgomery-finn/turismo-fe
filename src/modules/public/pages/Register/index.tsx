@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { Button, Datepicker, Label, TextInput } from 'flowbite-react';
+import { Button, Datepicker, Label, Select, TextInput } from 'flowbite-react';
 import SpringApi from "../../../shared/services/SpringApi";
 import PessoaDTO from "../../../admin/DTOs/PessoaDTO";
 import CenterContainer from "../../../shared/components/CenterContainer";
+import { useToast } from "../../../shared/hooks/toast";
 
 export default function Register() {
 
@@ -10,27 +11,34 @@ export default function Register() {
     const [birth, setBirth] = useState(new Date());
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
     
+    // const [type, setType] = useState<Number>(0);
+
+    const { addToast } = useToast();
+
     const handleSubmit = useCallback(async () => {
-        setError('');
-        setSuccess('');
 
         try{
             const response = await SpringApi.post<PessoaDTO>('/pessoa', {
                 nome: name,
                 email: email,
                 nascimento: birth,
-                password
+                password,
+                tipo: 0
             });
 
-            setSuccess(`Já cadastrou ${response.data.nome}`);
             // SpringApi.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+            addToast({
+                color: 'green',
+                description: 'Já cadastrou'
+            })
         }
         catch(e: any){
-            setError(JSON.stringify(e.response.data));
-            
+            addToast({
+                color: 'red',
+                description:JSON.stringify(e.response.data) 
+            });
         }
 
     }, [name, email, birth, password]);
@@ -73,11 +81,19 @@ export default function Register() {
                     
                     <Datepicker id="birth" value={birth?.toString()} onSelectedDateChanged={(e) => setBirth(e)} />
                 </div>
+
+                {/* <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="type" value="Tipo" />
+                    </div>
+                    
+                    <Select id="type" required onChange={e => setType(Number(e.target.value))}>
+                        <option value={0} >Cliente</option>
+                        <option value={1}>Agência</option>
+                    </Select>
+                </div> */}
                 
                 <Button type="submit">Submit</Button>
-
-                <p className="text-red-500">{error}</p>
-                <p className="text-green-500">{success}</p>
             </form>
         </CenterContainer>
     );
