@@ -96,6 +96,10 @@ export default function Pacotes () {
                                     ))}
                                 </Table.Body>
                             </Table>
+
+                            <Link to={`/client/pacotes/details/${pacote.id}`}>
+                                <Button>Ver detalhes</Button>
+                            </Link>
                         </div>
                     </Card>     
                 ))}

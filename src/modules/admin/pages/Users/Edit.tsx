@@ -15,6 +15,7 @@ export default function EditUser() {
     const [birth, setBirth] = useState(new Date());
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [type, setType] = useState<Number>(0);
 
     const busca = useCallback(async (userId: string) => {
         const response = await SpringApi.get<PessoaDTO>(`pessoa/${userId}`);
@@ -22,6 +23,7 @@ export default function EditUser() {
         setName(response.data.nome);
         setBirth(response.data.nascimento);
         setEmail(response.data.email);
+        setType(response.data.tipo == 'cliente' ? 0 : 1);
 
         console.log('ja buscou')
     }, [id]);
@@ -61,7 +63,7 @@ export default function EditUser() {
 
     return (
         <div>
-            <Title>Aqui adiciona um novo usuário</Title>
+            <Title>Aqui edita o usuário</Title>
 
             <form action="#" className="space-y-4">
             <div>
@@ -84,19 +86,21 @@ export default function EditUser() {
 
                 <div>
                     <div className="mb-2 block">
-                        <Label htmlFor="password" value="Senha" />
-                    </div>
-                    
-                    <TextInput id="password" type="password" required 
-                        value={password} onChange={(event) => setPassword(event.target.value) }/>
-                </div>
-
-                <div>
-                    <div className="mb-2 block">
                         <Label htmlFor="birth" value="Aniversário" />
                     </div>
                     
                     <Datepicker id="birth" value={birth?.toString()} onSelectedDateChanged={(e) => setBirth(e)} />
+                </div>
+
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="type" value="Tipo" />
+                    </div>
+                    
+                    <Select id="type" required onChange={e => setType(Number(e.target.value))}>
+                        <option value={0} selected={type == 0}>Cliente</option>
+                        <option value={1} selected={type == 1}> Agência</option>
+                    </Select>
                 </div>
 
                 <Button onClick={handleSubmit}>Adiciona</Button>
