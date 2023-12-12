@@ -46,7 +46,7 @@ export default function Register() {
     return (
         <CenterContainer>
 
-            <form className="flex max-w-md flex-col gap-4" action="#" onSubmit={handleSubmit}>
+            <form className="flex max-w-md flex-col gap-4" action="#">
                 <div>
                     <div className="mb-2 block">
                         <Label htmlFor="name" value="Nome" />
@@ -93,7 +93,7 @@ export default function Register() {
                     </Select>
                 </div> */}
                 
-                <Button type="submit">Submit</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
             </form>
         </CenterContainer>
     );
