@@ -16,7 +16,7 @@ export default function Component() {
     const handleSubmit = useCallback(async () => {
 
         try{
-           const a = await logIn({email, password});
+           await logIn({email, password});
             
             addToast({
                 color: 'green',
@@ -35,7 +35,7 @@ export default function Component() {
     return (
         <CenterContainer>
 
-            <form className="flex max-w-md flex-col gap-4" action="#" onSubmit={handleSubmit}>
+            <form className="flex max-w-md flex-col gap-4" action="#">
                 <div>
                     <div className="mb-2 block">
                         <Label htmlFor="email" value="Your email" />
@@ -54,8 +54,7 @@ export default function Component() {
                         value={password} onChange={(event) => setPassword(event.target.value) }/>
                 </div>
                 
-                <Button type="submit">Submit</Button>
-
+                <Button onClick={handleSubmit}>Submit</Button>
             </form>
         </CenterContainer>
     );

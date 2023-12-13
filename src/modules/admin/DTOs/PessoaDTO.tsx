@@ -3,4 +3,5 @@ export default interface PessoaDTO {
     nome: string,
     email:string,
     nascimento: Date
+    tipo: 'cliente'|'agencia'
 }

@@ -23,21 +23,21 @@ export default function ShowReserva() {
 
     const [evaluations, setEvaluations] = useState<Evaluation[]>([]);
 
-    const buscaAvaliacoes = useCallback(async (reservaId: string) => {
-            const response = await NodeApi.get<Evaluation[]>(`evaluations/pacoteId/${reservaId}`)
+    const buscaAvaliacoes = useCallback(async (pacoteId: string) => {
+            const response = await NodeApi.get<Evaluation[]>(`evaluations/pacoteId/${pacoteId}`)
 
             setEvaluations(response.data);
     }, [])
 
     useEffect(() => {
         if(reserva){
-            buscaAvaliacoes(reserva.id);
+            buscaAvaliacoes(reserva.pacote.id as string);
         }
     }, [reserva]);
 
     useEffect(() => {
         buscaReserva(reservaId as string)
-    }, [reservaId])
+    }, [reserva])
 
     const [score, setScore] = useState<Number>(5);
 
@@ -52,7 +52,7 @@ export default function ShowReserva() {
             const response = await NodeApi.post('evaluations', {
                 personId: user.id,
                 personName: user.nome,
-                pacoteId: reserva.id,
+                pacoteId: reserva.pacote.id,
                 score,
                 comment
             });
@@ -62,7 +62,7 @@ export default function ShowReserva() {
                 description: 'Já comentou'
             });
 
-            buscaAvaliacoes(reserva.id);
+            buscaAvaliacoes(reserva.pacote.id);
         }
     }, [score, comment, user, reserva]);
 

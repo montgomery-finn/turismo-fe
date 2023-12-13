@@ -13,6 +13,8 @@ export default function CreateUser() {
     const [birth, setBirth] = useState(new Date());
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [type, setType] = useState<Number>(0);
+
 
     const { addToast } = useToast();
 
@@ -24,7 +26,8 @@ export default function CreateUser() {
                 nome: name,
                 email: email,
                 nascimento: birth,
-                password
+                password,
+                tipo: type
             });
 
             addToast({
@@ -41,7 +44,7 @@ export default function CreateUser() {
             });
         }
         
-    }, [addToast, name, email, birth, password]);
+    }, [addToast, name, email, birth, password, type]);
 
     return (
         <div>
@@ -81,6 +84,17 @@ export default function CreateUser() {
                     </div>
                     
                     <Datepicker id="birth" value={birth?.toString()} onSelectedDateChanged={(e) => setBirth(e)} />
+                </div>
+
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="type" value="Tipo" />
+                    </div>
+                    
+                    <Select id="type" required onChange={e => setType(Number(e.target.value))}>
+                        <option value={0} >Cliente</option>
+                        <option value={1}>Agência</option>
+                    </Select>
                 </div>
 
                 <Button onClick={handleSubmit}>Adiciona</Button>
