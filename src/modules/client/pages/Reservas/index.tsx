@@ -24,6 +24,9 @@ export default function Reservas () {
         const respose = await SpringApi.get<ReservaDTO[]>(`reserva/getByUser/${userId}`);
             
         setReservas(respose.data)
+
+        console.log('esse é o userId => ', userId);
+        console.log('essas são as reservas => ', respose.data);
     }, []);
 
     useEffect(() => {
