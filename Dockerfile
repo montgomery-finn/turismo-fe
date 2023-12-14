@@ -21,6 +21,7 @@ FROM nginx:alpine
 
 # Copy the build output from the build environment to the Nginx web root
 COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose the default Nginx port
 EXPOSE 80
